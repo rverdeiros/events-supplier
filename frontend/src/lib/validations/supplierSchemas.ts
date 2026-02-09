@@ -77,7 +77,25 @@ export const companySupplierSchema = supplierBaseSchema.extend({
 // Schema genérico para edição (todos opcionais exceto os básicos)
 export const supplierSchema = supplierBaseSchema;
 
-export type SupplierFormData = z.infer<typeof supplierSchema>;
+// Explicitly define SupplierFormData to ensure supplier_type is required
+export type SupplierFormData = {
+  supplier_type: 'individual' | 'company';
+  fantasy_name: string;
+  legal_name?: string;
+  cnpj?: string;
+  description?: string;
+  category_id?: number;
+  address?: string;
+  zip_code?: string;
+  city: string;
+  state: string;
+  price_range?: 'low' | 'medium' | 'high';
+  phone: string;
+  email: string;
+  instagram_url?: string;
+  whatsapp_url?: string;
+  site_url?: string;
+};
 
 // Explicitly define IndividualSupplierFormData to ensure supplier_type is required
 export type IndividualSupplierFormData = {

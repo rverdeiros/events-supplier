@@ -15,7 +15,7 @@ export const registerSchema = z.object({
     .max(VALIDATION.NAME_MAX_LENGTH, `Nome deve ter no máximo ${VALIDATION.NAME_MAX_LENGTH} caracteres`),
   email: z.string().email('Email inválido'),
   password: passwordSchema,
-  type: z.enum(['client', 'supplier', 'admin']).optional().default('client'),
+  type: z.enum(['client', 'supplier', 'admin']),
 });
 
 export const loginSchema = z.object({
@@ -23,6 +23,13 @@ export const loginSchema = z.object({
   password: z.string().min(1, 'Senha é obrigatória'),
 });
 
-export type RegisterFormData = z.infer<typeof registerSchema>;
+// Explicitly define RegisterFormData to ensure type is required
+export type RegisterFormData = {
+  name: string;
+  email: string;
+  password: string;
+  type: 'client' | 'supplier' | 'admin';
+};
+
 export type LoginFormData = z.infer<typeof loginSchema>;
 

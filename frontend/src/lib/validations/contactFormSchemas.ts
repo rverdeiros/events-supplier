@@ -17,7 +17,7 @@ const questionTypeSchema = z.enum([
 export const questionSchema = z.object({
   question: z.string().min(1, 'Pergunta é obrigatória'),
   type: questionTypeSchema,
-  required: z.boolean().optional().default(false),
+  required: z.boolean(),
   placeholder: z.string().optional(),
   options: z.array(z.string()).optional(),
   min_value: z.number().optional(),
@@ -28,7 +28,7 @@ export const questionSchema = z.object({
 
 export const contactFormSchema = z.object({
   questions: z.array(questionSchema),
-  active: z.boolean().optional().default(true),
+  active: z.boolean(),
 });
 
 export const contactFormSubmissionSchema = z.object({
@@ -38,7 +38,23 @@ export const contactFormSubmissionSchema = z.object({
   submitter_phone: z.string().min(1, 'Telefone é obrigatório'),
 });
 
-export type QuestionFormData = z.infer<typeof questionSchema>;
-export type ContactFormFormData = z.infer<typeof contactFormSchema>;
+// Explicitly define types to ensure required fields
+export type QuestionFormData = {
+  question: string;
+  type: 'text' | 'textarea' | 'email' | 'phone' | 'number' | 'select' | 'multiselect' | 'radio' | 'checkbox' | 'date' | 'datetime';
+  required: boolean;
+  placeholder?: string;
+  options?: string[];
+  min_value?: number;
+  max_value?: number;
+  min_length?: number;
+  max_length?: number;
+};
+
+export type ContactFormFormData = {
+  questions: QuestionFormData[];
+  active: boolean;
+};
+
 export type ContactFormSubmissionFormData = z.infer<typeof contactFormSubmissionSchema>;
 
