@@ -61,6 +61,7 @@ export interface SupplierFilters {
   price_range?: PriceRange;
   search?: string;  // Search by name, description, or city
   random?: boolean;  // Return random suppliers
+  order_by?: 'created_at' | 'rating';  // Order by: 'created_at' or 'rating'
   page?: number;
   page_size?: number;
 }

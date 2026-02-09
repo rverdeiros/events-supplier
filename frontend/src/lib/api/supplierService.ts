@@ -19,6 +19,7 @@ export const supplierService = {
     if (filters?.price_range) params.append('price_range', filters.price_range);
     if (filters?.search) params.append('search', filters.search);
     if (filters?.random) params.append('random', 'true');
+    if (filters?.order_by) params.append('order_by', filters.order_by);
     if (filters?.page) params.append('page', filters.page.toString());
     if (filters?.page_size) params.append('page_size', filters.page_size.toString());
 
