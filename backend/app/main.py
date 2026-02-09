@@ -55,6 +55,26 @@ from app.models import user_model, supplier_model, category_model, review_model,
 
 Base.metadata.create_all(bind=engine)
 
+# Root endpoint
+@app.get("/")
+def root():
+	"""Root endpoint - API information and links."""
+	return {
+		"message": "Event Suppliers API",
+		"version": "1.0.0",
+		"status": "running",
+		"docs": "/docs",
+		"healthcheck": "/healthcheck",
+		"endpoints": {
+			"auth": "/auth",
+			"suppliers": "/fornecedores",
+			"categories": "/categorias",
+			"reviews": "/reviews",
+			"contact": "/contato",
+			"media": "/media"
+		}
+	}
+
 # Healthcheck
 @app.get("/healthcheck")
 def health():
