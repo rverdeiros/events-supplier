@@ -24,7 +24,7 @@ const cnpjSchema = z.string()
 
 // Schema base com campos opcionais
 const supplierBaseSchema = z.object({
-  supplier_type: z.enum(['individual', 'company']).default('individual'),
+  supplier_type: z.enum(['individual', 'company']),
   fantasy_name: z.string().min(1, 'Nome fantasia é obrigatório'),
   legal_name: z.string().optional(),
   cnpj: cnpjSchema,
