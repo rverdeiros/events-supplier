@@ -44,6 +44,7 @@ const supplierBaseSchema = z.object({
 
 // Schema para Pessoa Física (address e zip_code obrigatórios)
 export const individualSupplierSchema = supplierBaseSchema.extend({
+  supplier_type: z.enum(['individual', 'company']), // Override to make it required
   address: z.string().min(1, 'Endereço é obrigatório'),
   zip_code: z.string()
     .refine((val) => {
@@ -55,6 +56,7 @@ export const individualSupplierSchema = supplierBaseSchema.extend({
 
 // Schema para Pessoa Jurídica (todos os campos PJ obrigatórios)
 export const companySupplierSchema = supplierBaseSchema.extend({
+  supplier_type: z.enum(['individual', 'company']), // Override to make it required
   legal_name: z.string().min(1, 'Razão social é obrigatória'),
   cnpj: z.string()
     .min(1, 'CNPJ é obrigatório para pessoa jurídica')
@@ -76,6 +78,44 @@ export const companySupplierSchema = supplierBaseSchema.extend({
 export const supplierSchema = supplierBaseSchema;
 
 export type SupplierFormData = z.infer<typeof supplierSchema>;
-export type IndividualSupplierFormData = z.infer<typeof individualSupplierSchema>;
-export type CompanySupplierFormData = z.infer<typeof companySupplierSchema>;
+
+// Explicitly define IndividualSupplierFormData to ensure supplier_type is required
+export type IndividualSupplierFormData = {
+  supplier_type: 'individual';
+  fantasy_name: string;
+  legal_name?: string;
+  cnpj?: string;
+  description?: string;
+  category_id?: number;
+  address: string;
+  zip_code: string;
+  city: string;
+  state: string;
+  price_range?: 'low' | 'medium' | 'high';
+  phone: string;
+  email: string;
+  instagram_url?: string;
+  whatsapp_url?: string;
+  site_url?: string;
+};
+
+// Explicitly define CompanySupplierFormData to ensure supplier_type is required
+export type CompanySupplierFormData = {
+  supplier_type: 'company';
+  fantasy_name: string;
+  legal_name: string;
+  cnpj: string;
+  description?: string;
+  category_id?: number;
+  address: string;
+  zip_code: string;
+  city: string;
+  state: string;
+  price_range?: 'low' | 'medium' | 'high';
+  phone: string;
+  email: string;
+  instagram_url?: string;
+  whatsapp_url?: string;
+  site_url?: string;
+};
 
