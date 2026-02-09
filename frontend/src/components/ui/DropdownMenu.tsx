@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { cn } from '@/lib/utils/cn';
 
 interface DropdownMenuItem {
-  label: string;
+  label?: string;
   href?: string;
   onClick?: () => void;
   icon?: React.ReactNode;
@@ -99,7 +99,7 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({
                     role="menuitem"
                   >
                     {item.icon && <span className="w-4 h-4">{item.icon}</span>}
-                    <span>{item.label}</span>
+                    {item.label && <span>{item.label}</span>}
                   </div>
                 );
 

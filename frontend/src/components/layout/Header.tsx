@@ -71,7 +71,7 @@ export const Header = () => {
 
     // Se o usuário é fornecedor, adiciona o nome do fornecedor como item no menu
     if (user?.type === 'supplier' && supplier) {
-      const supplierName = supplier.fantasy_name || supplier.name;
+      const supplierName = supplier.fantasy_name;
       if (supplierName) {
         items.push({
           label: supplierName,
@@ -246,7 +246,7 @@ export const Header = () => {
                       onClick={() => setMobileMenuOpen(false)}
                     >
                       <Building2 className="w-4 h-4 inline mr-2" />
-                      {supplier.fantasy_name || supplier.name}
+                      {supplier.fantasy_name}
                     </Link>
                   )}
                   {user?.type !== 'supplier' && user?.type !== 'admin' && (

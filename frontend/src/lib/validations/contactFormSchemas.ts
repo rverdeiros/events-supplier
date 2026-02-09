@@ -32,7 +32,7 @@ export const contactFormSchema = z.object({
 });
 
 export const contactFormSubmissionSchema = z.object({
-  answers: z.record(z.string()),
+  answers: z.record(z.string(), z.string()),
   submitter_name: z.string().min(1, 'Nome é obrigatório'),
   submitter_email: z.string().email('Email inválido'),
   submitter_phone: z.string().min(1, 'Telefone é obrigatório'),
