@@ -89,7 +89,7 @@ export const CompanySupplierForm: React.FC<CompanySupplierFormProps> = ({ onSucc
     return isTouched && hasError ? hasError : undefined;
   };
 
-  const onSubmit = async (data: SupplierFormData) => {
+  const onSubmit = async (data: CompanySupplierFormData) => {
     setIsLoading(true);
     try {
       // Remove campos de URL vazios (converte "" para undefined)
