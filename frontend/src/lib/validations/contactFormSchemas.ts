@@ -56,5 +56,11 @@ export type ContactFormFormData = {
   active: boolean;
 };
 
-export type ContactFormSubmissionFormData = z.infer<typeof contactFormSubmissionSchema>;
+// Explicitly define ContactFormSubmissionFormData for consistency
+export type ContactFormSubmissionFormData = {
+  answers: Record<string, string>;
+  submitter_name: string;
+  submitter_email: string;
+  submitter_phone: string;
+};
 

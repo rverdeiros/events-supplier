@@ -31,5 +31,9 @@ export type RegisterFormData = {
   type: 'client' | 'supplier' | 'admin';
 };
 
-export type LoginFormData = z.infer<typeof loginSchema>;
+// Explicitly define LoginFormData for consistency
+export type LoginFormData = {
+  email: string;
+  password: string;
+};
 

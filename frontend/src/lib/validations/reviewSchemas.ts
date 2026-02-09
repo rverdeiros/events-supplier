@@ -9,5 +9,10 @@ export const reviewSchema = z.object({
     .min(VALIDATION.COMMENT_MIN_LENGTH, `Comentário deve ter pelo menos ${VALIDATION.COMMENT_MIN_LENGTH} caracteres`),
 });
 
-export type ReviewFormData = z.infer<typeof reviewSchema>;
+// Explicitly define ReviewFormData for consistency
+export type ReviewFormData = {
+  supplier_id: number;
+  rating: number;
+  comment: string;
+};
 
