@@ -85,7 +85,7 @@ export const IndividualSupplierForm: React.FC<IndividualSupplierFormProps> = ({ 
     phoneRegister.onChange(e);
   };
 
-  const onSubmit = async (data: SupplierFormData) => {
+  const onSubmit = async (data: IndividualSupplierFormData) => {
     setIsLoading(true);
     try {
       // Remove campos de URL vazios (converte "" para undefined)
