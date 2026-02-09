@@ -6,5 +6,10 @@ export const categorySchema = z.object({
   active: z.boolean().default(true),
 });
 
-export type CategoryFormData = z.infer<typeof categorySchema>;
+// Explicitly define the type to ensure required fields
+export type CategoryFormData = {
+  name: string;
+  origin: 'fixed' | 'manual';
+  active: boolean;
+};
 
