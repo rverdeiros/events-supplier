@@ -44,7 +44,7 @@ const supplierBaseSchema = z.object({
 
 // Schema para Pessoa Física (address e zip_code obrigatórios)
 export const individualSupplierSchema = supplierBaseSchema.extend({
-  supplier_type: z.enum(['individual', 'company']), // Override to make it required
+  supplier_type: z.literal('individual'), // Restrict to 'individual' only
   address: z.string().min(1, 'Endereço é obrigatório'),
   zip_code: z.string()
     .refine((val) => {
@@ -56,7 +56,7 @@ export const individualSupplierSchema = supplierBaseSchema.extend({
 
 // Schema para Pessoa Jurídica (todos os campos PJ obrigatórios)
 export const companySupplierSchema = supplierBaseSchema.extend({
-  supplier_type: z.enum(['individual', 'company']), // Override to make it required
+  supplier_type: z.literal('company'), // Restrict to 'company' only
   legal_name: z.string().min(1, 'Razão social é obrigatória'),
   cnpj: z.string()
     .min(1, 'CNPJ é obrigatório para pessoa jurídica')
