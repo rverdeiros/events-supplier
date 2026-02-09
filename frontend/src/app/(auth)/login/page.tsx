@@ -1,8 +1,23 @@
 'use client';
 
+import { Suspense } from 'react';
 import { LoginForm } from '@/components/forms/LoginForm';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/Card';
 import Link from 'next/link';
+
+function LoginFormWrapper() {
+  return (
+    <>
+      <LoginForm />
+      <div className="mt-6 text-center text-sm">
+        <span className="text-gray-600">Não tem uma conta? </span>
+        <Link href="/register" className="text-blue-600 hover:text-blue-700 font-medium">
+          Cadastre-se
+        </Link>
+      </div>
+    </>
+  );
+}
 
 export default function LoginPage() {
   return (
@@ -12,13 +27,9 @@ export default function LoginPage() {
           <CardTitle className="text-2xl text-center">Entrar</CardTitle>
         </CardHeader>
         <CardContent>
-          <LoginForm />
-          <div className="mt-6 text-center text-sm">
-            <span className="text-gray-600">Não tem uma conta? </span>
-            <Link href="/register" className="text-blue-600 hover:text-blue-700 font-medium">
-              Cadastre-se
-            </Link>
-          </div>
+          <Suspense fallback={<div className="text-center py-4">Carregando...</div>}>
+            <LoginFormWrapper />
+          </Suspense>
         </CardContent>
       </Card>
     </div>

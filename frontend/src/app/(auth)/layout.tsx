@@ -1,10 +1,10 @@
 'use client';
 
-import { useEffect } from 'react';
+import { Suspense, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useAuthStore } from '@/lib/store/authStore';
 
-export default function AuthLayout({
+function AuthLayoutContent({
   children,
 }: {
   children: React.ReactNode;
@@ -31,5 +31,17 @@ export default function AuthLayout({
   }
 
   return <>{children}</>;
+}
+
+export default function AuthLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center">Carregando...</div>}>
+      <AuthLayoutContent>{children}</AuthLayoutContent>
+    </Suspense>
+  );
 }
 
